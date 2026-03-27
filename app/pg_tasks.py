@@ -73,7 +73,7 @@ class PageTasks:
                         task.draw(key=unique_key)
                         if task.edit:
                             editing = True
-                    st.button(t("button.create_task"), on_click=self.create_task, disabled=editing,kwargs={'crew': crew}, key=f"create_task_{crew.name}")
+                    st.button(t("button.create_task"), on_click=self.create_task, disabled=editing,kwargs={'crew': crew}, key=f"create_task_{crew.id}")
 
 
             if len(ss.tasks) == 0:

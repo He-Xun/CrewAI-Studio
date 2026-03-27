@@ -63,6 +63,8 @@
     "none_defined": "还未定义任何团队。",
     "name": "名称（仅作为 id，不影响其他）",
     "process": "流程",
+    "process_sequential": "顺序执行",
+    "process_hierarchical": "层级执行",
     "agents": "Agents",
     "tasks": "任务",
     "manager_llm": "管理员 LLM",

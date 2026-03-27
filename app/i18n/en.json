@@ -63,6 +63,8 @@
     "none_defined": "No crews defined yet.",
     "name": "Name (just id, it doesn't affect anything)",
     "process": "Process",
+    "process_sequential": "Sequential",
+    "process_hierarchical": "Hierarchical",
     "agents": "Agents",
     "tasks": "Tasks",
     "manager_llm": "Manager LLM",

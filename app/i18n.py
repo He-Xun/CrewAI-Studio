@@ -12,6 +12,9 @@ I18N_DIR = Path(__file__).parent / "i18n"
 # Load all available languages
 _translations = {}
 
+# Get default language from environment variable
+DEFAULT_LANGUAGE = os.getenv("DEFAULT_LANGUAGE", "en")
+
 
 def _load_translations():
     """Load all translation files."""
@@ -30,9 +33,9 @@ def get_available_languages():
 
 
 def get_current_language():
-    """Get the current language from session state."""
+    """Get the current language from session state, using DEFAULT_LANGUAGE if not set."""
     if "language" not in ss:
-        ss.language = "en"
+        ss.language = DEFAULT_LANGUAGE if DEFAULT_LANGUAGE in get_available_languages() else "en"
     return ss.language
 
 

@@ -267,7 +267,18 @@ class MyCrew:
         if self.edit:
             with st.container(border=True):
                 st.text_input(t("crew.name"), value=self.name, key=name_key, on_change=self.update_name)
-                st.selectbox(t("crew.process"), options=[Process.sequential, Process.hierarchical], index=[Process.sequential, Process.hierarchical].index(self.process), key=process_key, on_change=self.update_process)
+                process_display = {
+                    Process.sequential: t("crew.process_sequential"),
+                    Process.hierarchical: t("crew.process_hierarchical")
+                }
+                selected_process = st.selectbox(
+                    t("crew.process"),
+                    options=[Process.sequential, Process.hierarchical],
+                    index=[Process.sequential, Process.hierarchical].index(self.process),
+                    format_func=lambda x: process_display[x],
+                    key=process_key,
+                    on_change=self.update_process
+                )
                 st.multiselect(t("crew.agents"), options=[agent.role for agent in ss.agents], default=[agent.role for agent in self.agents], key=agents_key, on_change=self.update_agents)
                 # Filter tasks by selected agents
                 available_tasks = [task for task in ss.tasks if task.agent and task.agent.id in [agent.id for agent in self.agents]]
@@ -306,7 +317,11 @@ class MyCrew:
             fix_columns_width()
             expander_title = t("crew.title", name=self.name) if self.is_valid() else f"❗ {t('crew.title', name=self.name)}"
             with st.expander(expander_title, expanded=expanded):
-                st.markdown(f"**{t('crew.process')}:** {self.process}")
+                process_display = {
+                    Process.sequential: t("crew.process_sequential"),
+                    Process.hierarchical: t("crew.process_hierarchical")
+                }
+                st.markdown(f"**{t('crew.process')}:** {process_display.get(self.process, str(self.process))}")
                 if self.process == Process.hierarchical:
                     st.markdown(f"**{t('crew.manager_llm')}:** {self.manager_llm}")
                     st.markdown(f"**{t('crew.manager_agent')}:** {self.manager_agent.role if self.manager_agent else 'None'}")
